@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:tns="http://www.shared.com/php_soapclient_example"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    name="MyDefinition"
+    targetNamespace="http://www.shared.com/php_soapclient_example">
+
+    <message name="stringParam">
+        <part name="reqParam" type="xsd:string" />
+    </message>
+    <message name="response">
+        <part name="resParam" type="xsd:string" />
+    </message>
+
+    <portType name="SimpleServircePortType">
+        <operation name="insertData">
+            <input message="tns:stringParam" />
+            <output message="tns:response" />
+        </operation>
+        <operation name="readData">
+            <output message="tns:response" />
+        </operation>
+    </portType>
+
+    <binding name="SimpleServirceBinding" type="tns:SimpleServircePortType">
+        <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http" />
+        <operation name="insertData">
+            <soap:operation soapAction="" />
+            <input>
+                <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </input>
+            <output>
+                <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </output>
+        </operation>
+        <operation name="readData">
+            <output>
+                <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </output>
+        </operation>
+    </binding>
+
+    <service name="SimpleSoapService">
+        <documentation>Reads and writes data into a text file.</documentation>
+        <port name="SimpleServircePort" binding="tns:SimpleServirceBinding">
+            <soap:address location="http://www.shared.com/php_soapclient_example/wsdl/server_endpoint.php" />
+        </port>
+    </service>
+
+</definitions>
