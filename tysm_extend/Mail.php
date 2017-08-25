@@ -6,7 +6,7 @@
  * Date: 2017/8/24
  * Time: 14:53
  */
-require '../mail/PHPMailerAutoload.php';
+require './mail/PHPMailerAutoload.php';
 Class Mail
 {
     private $to;
