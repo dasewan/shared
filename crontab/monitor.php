@@ -19,6 +19,7 @@ if($result['code'] == 200 && strlen($result['data'])>6000){
     $data['to'] = '781021164@qq.com';
     $data['body'] = '服务器没问题，数据有问题';
     $data['subject'] = '服务器没问题，数据有问题';
+
     $a = common_curl($notice, $data);
 }else{
     $data['action'] = 'mail';

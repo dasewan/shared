@@ -57,3 +57,4 @@ gradle/
 gradlew
 gradlew.bat
 unused.txt
+*_jb_old___
