@@ -5,6 +5,8 @@
  * Date: 2017/8/24
  * Time: 15:32
  */
+require '../tysm_extend/PHP-MySQLi-Database-Class/MysqliDb.php';
+require '../tysm_extend/config.php';
 function common_curl($url, $param = []){
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
@@ -28,4 +30,30 @@ function common_curl($url, $param = []){
         return ['code'=>$http_status, 'msg'=>'die status'];
     }
 
+}
+
+function read_all_dir ( $dir )
+{
+    $result = array();
+    $handle = opendir($dir);
+    if ( $handle )
+    {
+        while ( ( $file = readdir ( $handle ) ) !== false )
+        {
+            if ( $file != '.' && $file != '..')
+            {
+                $cur_path = $dir . DIRECTORY_SEPARATOR . $file;
+                if ( is_dir ( $cur_path ) )
+                {
+                    $result['dir'][$cur_path] = read_all_dir ( $cur_path );
+                }
+                else
+                {
+                    $result['file'][] = $cur_path;
+                }
+            }
+        }
+        closedir($handle);
+    }
+    return $result;
 }
